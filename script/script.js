@@ -1,16 +1,17 @@
+//basic
+window.scroll
 //cursor
 const cursor = document.getElementById('cursor');
 const cursorInfo = {
-    dx: (window.innerWidth - cursor.clientWidth) / 2,
-    dy: (window.innerHeight - cursor.clientHeight) / 2,
+    dx: window.innerWidth / 2,
+    dy: window.innerHeight / 2,
     x: 0,
     y: 0,
     speed: 0.15
-
 }
 window.onmousemove = e => {
-    cursorInfo.x = e.clientX - cursor.clientWidth / 2
-    cursorInfo.y = e.clientY - cursor.clientHeight / 2
+    cursorInfo.x = e.clientX
+    cursorInfo.y = e.clientY
 }
 function cursorAnim() {
     cursor.style.left = cursorInfo.dx + 'px';
@@ -46,7 +47,12 @@ function backgroundAnim() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     ctx.fillStyle = '#ffbb00'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
-    if (window.scrollY < 1000)
+    const maxScroll = window.innerWidth / 1.5
+    const w = window.innerWidth * (0.3 + window.scrollY / maxScroll * 0.7);
+    const h = w * 2;
+    const x = (window.innerWidth - w) / 2;
+    const y = window.innerHeight / 2 - h * 0.3
+    if (window.scrollY < maxScroll) {
         for (let y = 0; y < 8; y++) {
             for (let x = y % 2; x < 5; x += 2) {
                 let xpos = x * window.innerWidth / 4
@@ -54,12 +60,15 @@ function backgroundAnim() {
                 makeText(xpos, ypos + textsYpos)
             }
         }
+        ctx.strokeRect(x, y, w, h)
+    }
+    ctx.clearRect(x, y, w, h)
     if (textsYpos > -window.innerHeight / 2.75)
         textsYpos -= 0.1
     else
         textsYpos = 0
     //erase area
-    ctx.clearRect(window.innerWidth * 0.3, window.innerHeight * 0.4, window.innerWidth * 0.4, window.innerHeight * 0.6)
+
 }
 
 (function render() {

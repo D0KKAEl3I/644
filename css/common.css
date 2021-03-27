@@ -4,10 +4,10 @@
 }
 
 html{
-    cursor: none;  
-}
-html::-webkit-scrollbar{
-    display: none;
+    cursor: none;    
+}   
+html::-webkit-scrollbar{ 
+    /* display: none; */
 }
 
 body {
@@ -29,6 +29,9 @@ li {
 }
 
 #cursor {
+    left: 50vw;
+    top: 50vh;
+    transform: translate(-50%,-50%);
     width: 1vw;
     height: 1vw;
     position: fixed;
@@ -42,12 +45,8 @@ li {
     top: 0;
     left: 0;           
 }
-.d{
-    position: fixed;
-    top: 0;
-    left: 0;
+.opening{
     width: 100vw;
-    height: 100vh;
-    background-color: red;
-    z-index: -1;       
-}
+    height: 500vh; 
+    background:linear-gradient(#ffbb00, #000000     );   
+}   
