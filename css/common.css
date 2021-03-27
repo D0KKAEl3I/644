@@ -3,6 +3,13 @@
     margin: 0;
 }
 
+html{
+    cursor: none;  
+}
+html::-webkit-scrollbar{
+    display: none;
+}
+
 body {
     background-color: rgb(255, 187, 0);
 }
@@ -22,9 +29,25 @@ li {
 }
 
 #cursor {
-    width: 16px;
-    height: 16px;
+    width: 1vw;
+    height: 1vw;
     position: fixed;
-    background-color: red;
+    background-color: red;  
+    z-index: 100;
     border-radius: 999px;
+}
+#background{
+    z-index: 99;    
+    position: fixed;
+    top: 0;
+    left: 0;           
+}
+.d{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: red;
+    z-index: -1;       
 }
