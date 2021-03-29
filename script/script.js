@@ -1,5 +1,10 @@
 //basic
-window.scroll
+const date = document.getElementById('date')
+const today = new Date()
+const monthList = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const month = monthList[today.getMonth()]
+const day = today.getDate()
+date.innerText = `${day} ${month}`
 //cursor
 const cursor = document.getElementById('cursor');
 const cursorInfo = {
@@ -34,10 +39,10 @@ document.onresize = () => {
 
 }
 function makeText(x, y) {
-    ctx.font = window.innerWidth / 40 + 'px Times New Roman';
+    let lineHeight = window.innerWidth / 30
+    ctx.font = lineHeight + 'px Times New Roman';
     ctx.textAlign = 'center';
     ctx.fillStyle = 'black'
-    let lineHeight = window.innerWidth / 40
     ctx.fillText('WELCOME!', x, y)
     ctx.fillText('ENJOY', x, y + lineHeight)
     ctx.fillText('YOUR STAY', x, y + lineHeight * 2)
@@ -47,27 +52,29 @@ function backgroundAnim() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     ctx.fillStyle = '#ffbb00'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
+    const doorImage = document.getElementById('intro-door')
     const maxScroll = window.innerWidth / 1.5
-    const w = window.innerWidth * (0.3 + window.scrollY / maxScroll * 0.7);
-    const h = w * 2;
+    // const scope = 1
+    const scope = (window.scrollY / maxScroll) * (window.innerWidth / doorImage.clientWidth) + 0.9
+    const w = doorImage.clientWidth * scope
+    const h = doorImage.clientHeight * scope
     const x = (window.innerWidth - w) / 2;
     const y = window.innerHeight / 2 - h * 0.3
     if (window.scrollY < maxScroll) {
         for (let y = 0; y < 8; y++) {
             for (let x = y % 2; x < 5; x += 2) {
                 let xpos = x * window.innerWidth / 4
-                let ypos = y * window.innerHeight / 5.5
+                let ypos = y * window.innerHeight / 4
                 makeText(xpos, ypos + textsYpos)
             }
         }
         ctx.strokeRect(x, y, w, h)
     }
     ctx.clearRect(x, y, w, h)
-    if (textsYpos > -window.innerHeight / 2.75)
-        textsYpos -= 0.1
+    if (textsYpos > -window.innerHeight / 2)
+        textsYpos -= 0.45
     else
         textsYpos = 0
-    //erase area
 
 }
 
